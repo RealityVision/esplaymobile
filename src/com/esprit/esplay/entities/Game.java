@@ -1,113 +1,71 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.esprit.esplay.entities;
 
-import java.sql.Timestamp;
-
+import java.util.Objects;
 
 /**
  *
- * @author fadhe
+ * @author slim
  */
-
 public class Game {
+      private int idGame; 
 
-    private static final long serialVersionUID = 1L;
-    
-    private Integer idGame;
-    
-    private String title;
-    
-    private String description;
-    
-    private int size;
+    public Game(int idGame, String title) {
+        this.idGame = idGame;
+        this.title = title;
+    }
+    private String title; 
+    private String description; 
+    private String categorie; 
 
-    
-    private Double rate;
-   
-    private int category;
-    
-    private Timestamp date;
-    
-    private String image;
-    
-    private int ratenbr;
+    public Game(int idGame) {
+        this.idGame = idGame;
+    }
 
-    public Game(Integer idGame, String title, String description, int size, Double rate, int category, String image, int ratenbr) {
+    public Game(int idGame, String title, String description) {
         this.idGame = idGame;
         this.title = title;
         this.description = description;
+    }
+
+    public Game(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    public Game(String title, String description, String categorie, float size) {
+        this.title = title;
+        this.description = description;
+        this.categorie = categorie;
         this.size = size;
-        this.rate = rate;
-        this.category = category;
-        this.image = image;
-        this.ratenbr = ratenbr;
     }
 
-    public int getRatenbr() {
-        return ratenbr;
+    public Game(String title, String description, float size) {
+        this.title = title;
+        this.description = description;
+        this.size = size;
     }
 
-    public void setRatenbr(int ratenbr) {
-        this.ratenbr = ratenbr;
+    
+    
+    
+    public Game(int idGame, String title, String description, String categorie, float size) {
+        this.idGame = idGame;
+        this.title = title;
+        this.description = description;
+        this.categorie = categorie;
+        this.size = size;
     }
+    private float  size; 
 
     public Game() {
     }
 
-    public Timestamp getDate() {
-        return date;
-    }
-
-    public void setDate(Timestamp date) {
-        this.date = date;
-    }
-
-    
-    public Game(Integer idGame) {
-        this.idGame = idGame;
-    }
-
-    public Game(String title, String description, int size, int category,String image) {
-        this.title = title;
-        this.description = description;
-        this.size = size;
-        this.category = category;
-         this.image = image;
-
-       
-    }
-
-    public Game(Integer idGame, String title, String description, int size, Double rate, int category, String image) {
-        this.idGame = idGame;
-        this.title = title;
-        this.description = description;
-        this.size = size;
-        this.rate = rate;
-        this.category = category;
-        this.image = image;
-    }
-    
-
-    public Game(Integer idGame, String title, String description, int size, Double rate, int category) {
-        this.idGame = idGame;
-        this.title = title;
-        this.description = description;
-        this.size = size;
-        this.rate = rate;
-        this.category = category;
-    }
-
-    
-
-    public Integer getIdGame() {
+    public int getIdGame() {
         return idGame;
     }
 
-    public void setIdGame(Integer idGame) {
+    public void setIdGame(int idGame) {
         this.idGame = idGame;
     }
 
@@ -127,53 +85,60 @@ public class Game {
         this.description = description;
     }
 
-    public Integer getSize() {
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+
+    public float getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(float size) {
         this.size = size;
     }
 
-    public Double getRate() {
-        return rate;
+    public Game(int idGame, String title, String categorie, float size) {
+        this.idGame = idGame;
+        this.title = title;
+        this.categorie = categorie;
+        this.size = size;
     }
-
-    public void setRate(Double rate) {
-        this.rate = rate;
-    }
-
-    public int getCategory() {
-        return category;
-    }
-
-    public void setCategory(int category) {
-        this.category = category;
-    }
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-    
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idGame != null ? idGame.hashCode() : 0);
+        int hash = 7;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Game)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Game other = (Game) object;
-        if ((this.idGame == null && other.idGame != null) || (this.idGame != null && !this.idGame.equals(other.idGame))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Game other = (Game) obj;
+        if (this.idGame != other.idGame) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.size) != Float.floatToIntBits(other.size)) {
+            return false;
+        }
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.categorie, other.categorie)) {
             return false;
         }
         return true;
@@ -181,11 +146,11 @@ public class Game {
 
     @Override
     public String toString() {
-        return "Game{" + "idGame=" + idGame + ", title=" + title + ", description=" + description + ", size=" + size + ", rate=" + rate + ", category=" + category + ", date=" + date + ", image=" + image + '}';
+        return "Game{" + "idGame=" + idGame + ", title=" + title + ", description=" + description + ", categorie=" + categorie + ", size=" + size + '}';
     }
 
     
-    
+
+   
     
 }
-
