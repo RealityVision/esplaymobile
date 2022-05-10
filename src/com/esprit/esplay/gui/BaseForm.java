@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.esprit.esplay.gui;
 
 import com.codename1.components.ScaleImageLabel;

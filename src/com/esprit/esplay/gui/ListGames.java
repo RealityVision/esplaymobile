@@ -30,7 +30,7 @@ public class ListGames extends Form{
          public  ListGames(Form previous) {
 
       
-       setTitle("Liste des événements");
+       setTitle("GAME LIST");
          
    
  
