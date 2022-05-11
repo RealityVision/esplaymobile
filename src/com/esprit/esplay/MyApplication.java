@@ -24,6 +24,7 @@ import com.codename1.ui.Container;
 import com.codename1.ui.util.UIBuilder;
 import com.esprit.esplay.gui.AfficheChat;
 import com.esprit.esplay.gui.GameForm;
+import com.esprit.esplay.gui.ListRecomended;
 import com.esprit.esplay.gui.ProdForm;
 
 /**
@@ -36,6 +37,7 @@ public class MyApplication {
     private Resources theme;
 
     public void init(Object context) {
+        
         updateNetworkThreadCount(2);
         theme = UIManager.initFirstTheme("/theme");
         Toolbar.setGlobalToolbar(true);
@@ -95,7 +97,7 @@ public class MyApplication {
                 new GameForm(theme).show();
             });
             img2.addLongPressListener(evt -> {
-                new GameForm(theme).show();
+                new ListRecomended(theme,getCurrentForm()).show();
             });
             img3.addLongPressListener(evt -> {
                 new AfficheChat(current).show();

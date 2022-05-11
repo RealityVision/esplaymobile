@@ -17,40 +17,73 @@ import com.codename1.ui.Form;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.util.Resources;
 import com.esprit.esplay.entities.Game;
+import com.esprit.esplay.entities.Recomendedg;
 import com.esprit.esplay.services.ServiceGame;
+import com.esprit.esplay.services.ServiceRecomendedg;
 import java.util.ArrayList;
 
 /**
  *
  * @author fadhe
  */
-public class ListGames extends Form{
+public class ListRecomended extends Form{
     
-         public  ListGames(Form previous) {
+         public  ListRecomended(Resources res, Form previous) {
 
       
-       setTitle("GAME LIST");
+       setTitle("Recomended LIST");
          
    
- 
-        ServiceGame es = new ServiceGame();
-        ArrayList<Game> list = es.getAllGames();
+         Button addbtn = new Button("Add");
+        addbtn.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent evt) {
+                new AddRecomendedG(res,previous).show();
+           }
+       });
+        add(addbtn);
+        Button Search = new Button("Rechercher");
+        Search.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent evt) {
+               new RechercherRecomendedG(res,previous).show();
+           }
+       });
+        add(Search);
+      
+
+        
+      
+             ServiceRecomendedg es = new ServiceRecomendedg();
+        ArrayList<Recomendedg> list = es.getAllRecomendedgs();
 
         {
        
-            for (Game r : list) {
+            for (Recomendedg r : list) {
                 Container c3 = new Container(BoxLayout.y());
                
-                 SpanLabel cat= new SpanLabel("Game name :" + r.getTitle());
-                 SpanLabel cat1= new SpanLabel("Description :" + r.getDescription());
+                 SpanLabel cat= new SpanLabel("Game name :" + r.getNom());
+                 SpanLabel cat1= new SpanLabel("Platforme :" + r.getPlatform());
                  SpanLabel cat2= new SpanLabel("Category :" + r.getCategorie());
-                 SpanLabel cat3= new SpanLabel("Size :" + r.getSize()); 
+                 SpanLabel cat3= new SpanLabel("Url :" + r.getUrl()); 
+                 SpanLabel cat4= new SpanLabel("Prix :" + r.getPrix()); 
                         c3.add(cat);
                         c3.add(cat1);
                         c3.add(cat2);
                         c3.add(cat3);
+                        c3.add(cat4);
                          Button Delete =new Button("Delete");
+         Button Edit =new Button("Edit");
+         c3.add(Edit);
+         Edit.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        new EditRecomendedG(res,previous,r).show();
+                    }
+                });
+
          c3.add(Delete);
             Delete.getAllStyles().setBgColor(0xF36B08);
             Delete.addActionListener(e -> {
@@ -77,7 +110,7 @@ public class ListGames extends Form{
                 alert.add(ok);
                 alert.showDialog();
                 
-                new ListGames(previous).show();
+                new ListRecomended(res,previous).show();
             });       
            System.out.println("");
               
